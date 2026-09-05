@@ -1,0 +1,27 @@
+{
+    "Apple___Apple_scab": {
+        "name": "Apple Scab",
+        "description": "A fungal disease of apples that causes dark, scabby lesions on leaves and fruit. It is favored by cool, wet weather in the spring.",
+        "treatment": "Use disease-resistant varieties. Apply fungicides preventatively starting at green tip and continuing until the fruit is well formed. Remove fallen leaves in autumn."
+    },
+    "Apple___Black_rot": {
+        "name": "Apple Black Rot",
+        "description": "A fungal disease causing frog-eye leaf spot, fruit rot, and cankers on branches. Infection often occurs through wounds.",
+        "treatment": "Prune out and destroy infected branches and cankers. Remove mummified fruit. Apply appropriate fungicides from silver tip to harvest."
+    },
+    "Apple___Cedar_apple_rust": {
+        "name": "Cedar Apple Rust",
+        "description": "A fungal disease that requires both apple and juniper (cedar) plants to complete its life cycle. It causes yellow-orange spots on apple leaves.",
+        "treatment": "Remove nearby cedar trees if possible. Apply preventative fungicides to apple trees from pink bud to shortly after petal fall."
+    },
+    "Apple___healthy": {
+        "name": "Healthy Apple",
+        "description": "The leaf appears healthy with no visible signs of fungal or bacterial diseases.",
+        "treatment": "Continue regular maintenance, adequate watering, and routine fertilization to keep the plant healthy."
+    },
+    "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot": {
+        "name": "Corn Gray Leaf Spot",
+        "description": "A fungal disease affecting corn that produces rectangular, gray to brown lesions on the leaves, which can merge and blight the entire leaf.",
+        "treatment": "Plant resistant hybrids. Implement crop rotation (do not plant corn in the same field consecutively). Use tillage to help decompose crop residue, and apply fungicides if needed."
+    }
+}

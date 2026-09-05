@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Health AI - Advanced 3D Plant Disease Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="theme-dark">
+    <!-- Ambient 3D Glowing Background & Particles -->
+    <div class="ambient-background">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+        <div class="tech-grid"></div>
+        <div class="floating-particles" id="particles"></div>
+    </div>
+
+    <!-- Floating Leaf Aesthetics -->
+    <div class="leaf-container">
+        <div class="floating-leaf leaf-1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+        </div>
+        <div class="floating-leaf leaf-2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+        </div>
+    </div>
+
+    <main class="container page-wrapper">
+        <!-- Header / Navigation Bar -->
+        <header class="navbar glass-header">
+            <div class="brand">
+                <div class="brand-icon-3d">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">Crop Health <span class="accent-text">AI</span></span>
+                    <span class="brand-tag">v2.4 Neural Diagnostic System</span>
+                </div>
+            </div>
+            <div class="system-status">
+                <span class="status-dot pulse"></span>
+                <span class="status-label">Neural Engine Active</span>
+            </div>
+        </header>
+
+        <!-- Hero Title Section -->
+        <section class="hero-section">
+            <div class="badge-pill">
+                <span class="badge-icon">⚡</span>
+                <span>Next-Gen MobileNet Architecture</span>
+            </div>
+            <h1 class="hero-title">
+                Detect. Diagnose. <span class="gradient-emerald">Protect.</span>
+            </h1>
+            <p class="hero-subtitle">
+                Instant computer vision analysis for plant pathology. Upload leaf samples to receive real-time neural disease diagnosis and targeted agricultural remedies.
+            </p>
+        </section>
+
+        <!-- Main 3D Scanner & Upload Card -->
+        <section class="scanner-container">
+            <div class="card-3d-wrapper" id="card-wrapper">
+                <div class="glass-card main-scanner-card" id="tilt-card">
+                    <!-- Glass Reflection Overlay -->
+                    <div class="glass-glare"></div>
+                    
+                    <form action="/predict" method="POST" enctype="multipart/form-data" id="upload-form">
+                        <!-- Drop Zone -->
+                        <div class="drop-zone" id="drop-zone">
+                            <div class="drop-zone-content">
+                                <!-- 3D Animated Leaf / Target Graphic -->
+                                <div class="visual-scanner-target">
+                                    <div class="scanner-ring ring-outer"></div>
+                                    <div class="scanner-ring ring-inner"></div>
+                                    <div class="target-icon-3d">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="icon-upload-leaf">
+                                            <path d="M12 3v12m0-12l-4 4m4-4l4 4"></path>
+                                            <path d="M20 16.5v2a2.5 2.5 0 01-2.5 2.5h-11A2.5 2.5 0 014 18.5v-2"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="corner-tech tech-tl"></div>
+                                    <div class="corner-tech tech-tr"></div>
+                                    <div class="corner-tech tech-bl"></div>
+                                    <div class="corner-tech tech-br"></div>
+                                </div>
+
+                                <h3 class="drop-title">Drag & Drop Leaf Sample</h3>
+                                <p class="drop-description">Position a clear image of the affected plant leaf inside the scanner zone</p>
+                                
+                                <div class="upload-trigger-group">
+                                    <label for="file-upload" class="btn btn-emerald-glow">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                        <span>Browse Sample Image</span>
+                                    </label>
+                                    <input type="file" id="file-upload" name="file" accept="image/jpeg, image/png, image/jpg" required>
+                                </div>
+
+                                <div class="supported-info">
+                                    <span class="info-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> JPEG / PNG</span>
+                                    <span class="info-dot">•</span>
+                                    <span class="info-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Max 16 MB</span>
+                                    <span class="info-dot">•</span>
+                                    <span class="info-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Auto Preprocessed</span>
+                                </div>
+                            </div>
+
+                            <!-- Preview Stage -->
+                            <div class="preview-stage hidden" id="preview-stage">
+                                <div class="preview-frame-3d">
+                                    <img id="image-preview" alt="Crop Sample Preview">
+                                    <div class="preview-scan-line"></div>
+                                    <div class="preview-tech-overlay">
+                                        <span class="tech-tag">SAMPLE LOADED</span>
+                                        <span class="tech-tag-right">READY FOR INFERENCE</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Actions Bar -->
+                        <div class="actions hidden" id="actions">
+                            <button type="button" class="btn btn-glass-cancel" id="btn-cancel">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                                <span>Reset Selection</span>
+                            </button>
+                            <button type="submit" class="btn btn-emerald-analyze" id="btn-submit">
+                                <span>Execute AI Scan</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Holographic Loading & Scanning State -->
+                    <div class="loading-state hidden" id="loading-state">
+                        <div class="holo-scanner-visual">
+                            <div class="holo-cube">
+                                <div class="cube-face front"></div>
+                                <div class="cube-face back"></div>
+                                <div class="cube-face left"></div>
+                                <div class="cube-face right"></div>
+                                <div class="cube-face top"></div>
+                                <div class="cube-face bottom"></div>
+                            </div>
+                            <div class="holo-rings"></div>
+                        </div>
+                        <h4 class="loading-title">Extracting Leaf Pathology Features...</h4>
+                        <p class="loading-sub">Running 260 deep layer convolution weights via MobileNetV2 architecture</p>
+                        <div class="loading-progress-bar">
+                            <div class="progress-fill-active"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature / Supported Diagnosis Grid -->
+        <section class="features-section">
+            <h2 class="section-title">Diagnostic Capabilities</h2>
+            <div class="features-grid">
+                <div class="glass-card feature-card">
+                    <div class="feature-icon-wrapper icon-apple">
+                        <span>🍎</span>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Apple Pathology</h3>
+                        <p>Real-time detection of Apple Scab, Black Rot, and Cedar Apple Rust alongside healthy specimen verification.</p>
+                        <div class="feature-tags">
+                            <span class="micro-tag">3 Disease Classes</span>
+                            <span class="micro-tag">Healthy Control</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card feature-card">
+                    <div class="feature-icon-wrapper icon-corn">
+                        <span>🌽</span>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Maize / Corn Health</h3>
+                        <p>Specialized recognition of Cercospora leaf spot & Gray leaf spot in early foliage stages.</p>
+                        <div class="feature-tags">
+                            <span class="micro-tag">Leaf Spot Analysis</span>
+                            <span class="micro-tag">Foliar Pathology</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card feature-card">
+                    <div class="feature-icon-wrapper icon-treatment">
+                        <span>🌱</span>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Actionable Remedies</h3>
+                        <p>Integrated agricultural response protocols providing specific bio-fungicide and field management steps.</p>
+                        <div class="feature-tags">
+                            <span class="micro-tag">Instant Treatment</span>
+                            <span class="micro-tag">Field Recovery</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>© 2026 Crop Health AI. Powered by MobileNetV2 Deep Neural Network Model.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic Report - Crop Health AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="theme-dark result-page-body">
+    <!-- Ambient Background -->
+    <div class="ambient-background">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+        <div class="tech-grid"></div>
+    </div>
+
+    <main class="container page-wrapper">
+        <!-- Top Navigation -->
+        <header class="navbar glass-header">
+            <a href="/" class="btn-back-3d">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <span>Back to Scanner</span>
+            </a>
+            <div class="report-badge">
+                <span class="report-icon">📄</span>
+                <span>AI Diagnostic Report</span>
+            </div>
+        </header>
+
+        <!-- 3D Result Dashboard Grid -->
+        <div class="result-dashboard-3d">
+            <!-- Left Side: Image Sample Frame with 3D Depth -->
+            <div class="dashboard-column left-col">
+                <div class="glass-card sample-display-card" id="sample-card">
+                    <div class="card-header-bar">
+                        <div class="header-title-group">
+                            <span class="pulse-indicator"></span>
+                            <h3>Analyzed Leaf Sample</h3>
+                        </div>
+                        <span class="sample-id-tag">SAMPLE #2026-AI</span>
+                    </div>
+
+                    <div class="image-depth-container">
+                        <div class="depth-frame">
+                            <img src="{{ image_url }}" alt="Uploaded crop leaf specimen" class="specimen-img">
+                            
+                            <!-- Laser Scanning Overlay Beam -->
+                            <div class="laser-scan-beam"></div>
+                            
+                            <!-- Tech Frame Corner Accents -->
+                            <div class="frame-corner corner-tl"></div>
+                            <div class="frame-corner corner-tr"></div>
+                            <div class="frame-corner corner-bl"></div>
+                            <div class="frame-corner corner-br"></div>
+                            
+                            <div class="hud-overlay">
+                                <span class="hud-tag">RGB 224x224 MATRIX</span>
+                                <span class="hud-status">ANALYSIS COMPLETE</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sample-metadata">
+                        <div class="meta-item">
+                            <span class="meta-label">Input Shape</span>
+                            <span class="meta-val">224 × 224 × 3</span>
+                        </div>
+                        <div class="meta-divider"></div>
+                        <div class="meta-item">
+                            <span class="meta-label">Network Layer</span>
+                            <span class="meta-val">MobileNetV2</span>
+                        </div>
+                        <div class="meta-divider"></div>
+                        <div class="meta-item">
+                            <span class="meta-label">Inference Engine</span>
+                            <span class="meta-val">TensorFlow Keras</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Diagnostic Findings & Remedies -->
+            <div class="dashboard-column right-col">
+                <div class="glass-card analysis-result-card" id="result-card">
+                    <div class="glass-glare"></div>
+
+                    <!-- Status Badge -->
+                    <div class="status-header">
+                        <div class="status-badge-3d {{ 'status-healthy' if 'healthy' in disease.name.lower() else 'status-infected' }}">
+                            <span class="badge-icon-glow">
+                                {% if 'healthy' in disease.name.lower() %}
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                {% else %}
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                {% endif %}
+                            </span>
+                            <span>{{ 'Healthy Specimen Verified' if 'healthy' in disease.name.lower() else 'Plant Disease Detected' }}</span>
+                        </div>
+                        <span class="timestamp-badge">Real-Time Output</span>
+                    </div>
+                    
+                    <!-- Main Disease Title -->
+                    <h1 class="disease-title-3d gradient-emerald-blue">{{ disease.name }}</h1>
+                    
+                    <!-- Confidence Score Meter -->
+                    <div class="confidence-container">
+                        <div class="confidence-header">
+                            <div class="score-title-group">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                                <span>AI Confidence Probability</span>
+                            </div>
+                            <span class="confidence-percentage" id="confidence-val">{{ confidence }}</span>
+                        </div>
+                        
+                        <div class="progress-track-3d">
+                            <div class="progress-fill-animated" id="progress-bar" data-confidence="{{ confidence }}"></div>
+                            <div class="progress-glow-head"></div>
+                        </div>
+                    </div>
+
+                    <!-- Pathology Description Panel -->
+                    <div class="info-block-glass description-block">
+                        <div class="block-header">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            <h3>Pathology Description</h3>
+                        </div>
+                        <p class="block-text">{{ disease.description }}</p>
+                    </div>
+
+                    <!-- Recommended Action / Treatment Box -->
+                    <div class="info-block-glass treatment-block-highlight">
+                        <div class="block-header">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            <h3>Recommended Action Plan</h3>
+                        </div>
+                        <p class="block-text">{{ disease.treatment }}</p>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="action-buttons-group">
+                        <a href="/" class="btn btn-emerald-analyze btn-rescan-glow">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                            <span>Scan Another Plant Sample</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <p>© 2026 Crop Health AI. Powered by MobileNetV2 Deep Neural Network Model.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
